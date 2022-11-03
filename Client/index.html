@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#1D2125" media="(prefers-color-scheme: dark)">
 
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/src/Assets/favicon.svg" />
+  <link rel="icon" type="image/x-icon" href="Client/src/Assets/favicon.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -26,12 +26,10 @@
         <path
           d="M31 2H10a8 8 0 0 0-8 8v21M207 2h21a8 8 0 0 1 8 8v21m0 176v21a8 8 0 0 1-8 8h-21m-176 0H10a8 8 0 0 1-8-8v-21">
         </path>
-      </svg>
-      <svg class="code-outline-highlight" preserveAspectRatio="none"
+      </svg><svg class="code-outline-highlight" preserveAspectRatio="none"
         style="display:none;width:100%;height:100%;fill:none;stroke:#e9b213;stroke-width:5;stroke-dasharray:25;stroke-linecap:round;stroke-linejoin:round">
         <polygon></polygon>
-      </svg>
-    </div>
+      </svg></div>
   </div>
   <div>
     <label>
@@ -63,7 +61,7 @@
     <select id="cam-list">
       <option value="environment" selected="">Environment Facing (default)</option>
       <option value="user">User Facing</option>
-      <option value="778984578f5d14d62f1d3212ef1215f217014cf851087186eb7a87598c55c9b2">USB Live camera (0c45:6366)
+      <option value="3414a878d5e55b13dabb338621fd75e2a9a625df8e03358641a46a47909f7e8f">USB Live camera (0c45:6366)
       </option>
     </select>
   </div>
@@ -95,17 +93,7 @@
     const fileSelector = document.getElementById('file-selector');
     const fileQrResult = document.getElementById('file-qr-result');
 
-    var audio = new Audio("./src/Assets/beep.mp3");
-
-    var lastScanNull = 0;
-
-    function sleep(milliseconds) {
-      const date = Date.now();
-      let currentDate = null;
-      do {
-        currentDate = Date.now();
-      } while (currentDate - date < milliseconds);
-    }
+    var audio = new Audio("src/Assets/beep.mp3");
 
     function setResult(label, result) {
       console.log(result.data);
@@ -126,6 +114,7 @@
       },
       highlightScanRegion: true,
       highlightCodeOutline: true,
+      maxScansPerSecond: 1,
     });
 
     const updateFlashAvailability = () => {
@@ -148,7 +137,7 @@
         camList.add(option);
       }));
     });
-    
+
     QrScanner.hasCamera().then(hasCamera => camHasCamera.textContent = hasCamera);
 
     // for debugging
@@ -176,6 +165,26 @@
 
     flashToggle.addEventListener('click', () => {
       scanner.toggleFlash().then(() => flashState.textContent = scanner.isFlashOn() ? 'on' : 'off');
+    });
+
+    document.getElementById('start-button').addEventListener('click', () => {
+      scanner.start();
+    });
+
+    document.getElementById('stop-button').addEventListener('click', () => {
+      scanner.stop();
+    });
+
+    // ####### File Scanning #######
+
+    fileSelector.addEventListener('change', event => {
+      const file = fileSelector.files[0];
+      if (!file) {
+        return;
+      }
+      QrScanner.scanImage(file, { returnDetailedScanResult: true })
+        .then(result => setResult(fileQrResult, result))
+        .catch(e => setResult(fileQrResult, { data: e || 'No QR code found.' }));
     });
   </script>
 
@@ -229,8 +238,10 @@
     }
   </style>
 
-  <div id="root"></div>
-  <script type="module" src="/src/index.jsx"></script>
+
 </body>
+
+<div id="root"></div>
+<script type="module" src="/src/index.jsx"></script>
 
 </html>
