@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import React from 'react'
 import "./Home.scss"
+import { Navbar } from '../Common/Navbar/Navbar'
 
 export const Home = () => {
 
@@ -18,6 +19,7 @@ export const Home = () => {
 				/>
 			</Link>
 			<div className='homeBody'>
+				<Navbar />
 				<div className='homeTitle'>
 					{ titleText }
 				</div>
