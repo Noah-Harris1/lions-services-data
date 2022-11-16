@@ -5,9 +5,7 @@ import { Navbar } from '../Common/Navbar/Navbar'
 export const Dashboards = () => {
 	return (
 		<div className='dashboardsCont'>
-			<div className='dashboardsBody'>
-				<Navbar />
-			</div>
+			<Navbar />
 		</div>
 	)
 }
