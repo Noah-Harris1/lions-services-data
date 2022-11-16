@@ -13,12 +13,15 @@ export const QrGenerator = () => {
 	}
 
 	return (
-		<div className='qrGeneratorCont'>
+		<div>
 			<Navbar />
-			<br/>
-			<QRCode value = {message}/>
-			<input type="text" placeholder='Enter Text' id="message" onChange={handleChange} value={message}/>
+			<div className='qrGeneratorCont'>
+				<QRCode value = {message}/>
+				<br/>
+				<input type="text" placeholder='Enter Text' id="message" onChange={handleChange} value={message}/>
+			</div>
 		</div>
+		
 	)
 }
 
