@@ -1,0 +1,10 @@
+import React from "react";
+import './*INSERT COMPONENT NAME*.scss';
+
+export const *INSERT COMPONENT NAME* = () => {
+    return(
+        <div className = 'pageBody'>
+        
+        </div>
+    );
+}

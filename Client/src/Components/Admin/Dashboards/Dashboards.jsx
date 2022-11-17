@@ -1,7 +1,6 @@
 import React from 'react'
 import "./Dashboards.scss"
-import { Navbar } from '../Common/Navbar/Navbar'
-import {XYPlot, LineSeries, VerticalBarSeries, MarkSeries} from 'react-vis';
+import {XYPlot, VerticalBarSeries} from 'react-vis';
 
 export const Dashboards = () => {
 	const data = [
@@ -18,8 +17,8 @@ export const Dashboards = () => {
 	  ];
 	return (
 		<div>
-			<Navbar />
 			<div className='dashboardsCont'>
+				<h1>Here is where dashboards will be</h1>
 				<XYPlot height={200} width={200}>
 				<VerticalBarSeries data={data} />
 				</XYPlot>
