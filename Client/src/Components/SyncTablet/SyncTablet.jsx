@@ -25,6 +25,7 @@ export const SyncTablet = () => {
                 }
             }}
             videoStyle={{height: '30%'}}
+            constraints = {{ facingMode: 'environment'}}
             />
         </div>
     );

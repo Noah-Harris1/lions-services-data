@@ -11,7 +11,7 @@ export const QrScanner = (props) => {
   return (
     <div>
       <div className = 'qrScannerCont'>
-        <p>{data}</p>
+        <h1>{data}</h1>
       <QrReader onResult={(result, error) => {
                 if (!!result) {
                     setData(result?.text);
